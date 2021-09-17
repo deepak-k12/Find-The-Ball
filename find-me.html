@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Find Me</title>
+</head>
+<style type="text/css">
+
+	.grid {
+		margin-top: 50px;
+		display: grid;
+		grid-template-columns: repeat(3, 160px);
+		grid-template-rows: repeat(3, 160px);
+		grid-gap: 9px;
+		justify-content: center;
+		
+	}
+	.grid-item {
+		background: blue;
+	}
+	.circle { 
+   width: 150px;
+   height: 150px;
+   background: red; 
+   border-radius: 70px;
+}
+
+</style>
+
+<body>
+
+	<center><h1>Find The Hidden Ball</h1></center>
+	<div class="grid"></div>
+	<br>
+	<center><button style="font-size: 30px;" class="reset">Reset</button></center>
+
+</body>
+
+<script type="text/javascript">
+
+	let reset = document.querySelector('.reset')
+
+	let array = ['test','test','test','test','circle','test','test']
+
+	function shuffle(array) {
+	  array.sort(() => Math.random() - 0.5);
+	}
+
+	shuffle(array);
+
+
+	let grid = document.querySelector('.grid')
+	for(let i = 0;i < 9;i++)
+	{
+		let div = document.createElement('div')
+		div.classList.add('grid-item')
+		grid.append(div)
+	}
+
+	let grids = document.querySelectorAll('.grid-item')
+	for(let i=0;i<grids.length;i++)
+	{
+		grids[i].addEventListener('click',(e) => {
+			e.target.classList.toggle(array[i])
+			console.log('clicked')
+		})
+	}
+
+	reset.addEventListener('click',() => {
+	grids.forEach((grid) => {
+	  grid.classList.remove('circle');
+	})
+	shuffle(array);
+})
+
+</script>
+
+</html>
